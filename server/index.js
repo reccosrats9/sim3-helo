@@ -17,4 +17,5 @@ app.post('/register', c.register)
 app.post('/login', c.login)
 
 
+
 app.listen(3005, ()=>console.log(`Gettin' lit on port ${3005}🔥 🎇`))

@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom'
+import {connect} from 'react-redux'
+import {authorize} from '../../ducks/reducer'
+import './Auth.css'
 
-export default class Auth extends Component{
+export class Auth extends Component{
     constructor(){
         super()
         this.state={
@@ -36,12 +39,19 @@ export default class Auth extends Component{
         axios.post('/login', {username, password})
         .then(res=>{
             console.log(res.data)
-            return res.data})
+            const {id, username, profile_pic}= res.data[0]
+            console.log(this.props.authorize(username, id, profile_pic))
+            this.props.authorize(username, id, profile_pic)
+        })
     }
 
     render(){
         return(
-            <div>
+            <div className= 'box'>
+                <div>
+                <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/220px-SNice.svg.png'/>
+                <h1>Helo</h1>
+                </div>
                 <input type="text" 
                 placeholder='username'
                 onChange= {this.handleChangeUsername}
@@ -56,3 +66,7 @@ export default class Auth extends Component{
         )
     }
 }
+
+
+
+export default connect(null, {authorize})(Auth)

@@ -1,0 +1,9 @@
+.box{
+    background: #FF9770;
+    width: 50vw;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-content: center;
+}
