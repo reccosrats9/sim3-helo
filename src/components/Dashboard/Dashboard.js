@@ -1,6 +1,11 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import axios from 'axios';
+import './Dashboard.css';
+import {Link} from 'react-router-dom';
 
-export default class Dashboard extends Component{
+
+class Dashboard extends Component{
     constructor(){
         super()
         this.state={
@@ -8,9 +13,20 @@ export default class Dashboard extends Component{
             search: '',
             userposts: true
         }
+        this.componentDidMount= this.componentDidMount.bind(this)
+    }
+
+    componentDidMount(){
+        console.log(this.props)
+        const {id}= this.props.id
+        const {search, userposts}=this.state.search
+        axios.get(`/posts/${id}`).then(res=>{
+            console.log(res.data)
+            this.setState({posts: res.data})})
     }
 
     render(){
+        console.log(this.props)
         return(
             <div>
                 <input type="text" placeholder= 'search'/>
@@ -18,9 +34,11 @@ export default class Dashboard extends Component{
                 {this.state.posts.map(post=>{
                     return(
                         <div>
-                            {post.title}
-                            {post.author}
-                            {post.authorPic}
+                        <Link to= {`/post/${post.id} `}>
+                            <h2> {post.title} </h2>
+                        </Link >
+                            <h4> {post.username}</h4>
+                            <img src={post.img} class= 'img'/> 
                         </div>
                     )
                 })}
@@ -28,3 +46,10 @@ export default class Dashboard extends Component{
         )
     }
 }
+
+function mapStateToProps(state){
+    console.log(state)
+    return {id: state.id}
+}
+
+export default connect(mapStateToProps)(Dashboard)

@@ -60,8 +60,13 @@ export class Auth extends Component{
                  placeholder='password'
                  onChange= {this.handleChangePassword}
                  />
-                <Link to='/Dashboard' > <button onClick= {this.loginUser}>Login</button> </Link>
-                <Link to='/Dashboard' > <button onClick= {this.registerUser}>Register</button> </Link>
+                {/* <Link to='/Dashboard' >  */}
+                <button onClick= {this.loginUser}>Login</button>
+                 {/* </Link> */}
+                <Link to='/Dashboard' > <button> to DashBoard</button> </Link>
+                {/* <Link to='/Dashboard' > */}
+                 <button onClick= {this.registerUser}>Register</button>
+                  {/* </Link> */}
             </div>
         )
     }
