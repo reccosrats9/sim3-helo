@@ -3,7 +3,7 @@ create table posts(
     title varchar(45),
     img text,
     content text,
-    author_id integer references users.id
+    author_id integer references users(id)
 );
 
 insert into posts(title, img, content, author_id)
